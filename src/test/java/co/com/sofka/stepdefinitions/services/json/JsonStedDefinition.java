@@ -16,56 +16,87 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class JsonStedDefinition extends ServiceSetup {
 
-    public static Logger LOGGER = Logger.getLogger(ReqresStepDefinition.class);
+    public static Logger LOGGER = Logger.getLogger(JsonStedDefinition.class);
 
     @Given("el Usuario está en la Url https:\\/\\/jsonplaceholder.typicode.com\\/ y desea eliminar informacion de usuario.")
     public void elUsuarioEstáEnLaUrlHttpsJsonplaceholderTypicodeComYDeseaEliminarInformacionDeUsuario() {
-        super.setUpJson();
-        LOGGER.info("** Inicio primer scenario de Json");
+        try {
+            super.setUpJson();
+            LOGGER.info("** Inicio primer scenario de Json");
+        }catch (Exception e){
+            LOGGER.error(e);
+            LOGGER.info("Error en el inicio del primer Scenario Json");
+        }
     }
 
     @When("cuando el Usuario realiza la peticion de eliminado  de usuario")
     public void cuandoElUsuarioRealizaLaPeticionDeEliminadoDeUsuario() {
-        actor.attemptsTo(doGet().withTheResource(RESOURSE_JON));
-        LOGGER.info("** Inicio peticion");
+        try {
+            actor.attemptsTo(doGet().withTheResource(RESOURSE_JON));
+            LOGGER.info("** Inicio peticion");
+        }catch (Exception e){
+            LOGGER.error(e);
+            LOGGER.info("Error en el inicio del primer Scenario Json");
+        }
+
     }
     @Then("el Usuario deberá ver un codigo de respuesta de usuario eliminado")
     public void elUsuarioDeberáVerUnCodigoDeRespuestaDeUsuarioEliminado() {
-        actor.should(seeThat("Codigo de respuesta", ResponseStatusCode.was(), equalTo(200))
+        try {
+            actor.should(seeThat("Codigo de respuesta", ResponseStatusCode.was(), equalTo(200))
+                        );
+            LOGGER.info("** Verificacion scenario 1");
+        }catch (Exception e){
+            LOGGER.error(e);
+            LOGGER.info("Error en el inicio del primer Scenario Json");
+        }
 
-        );
-        LOGGER.info("** Verificacion scenario 1");
     }
 
     @Given("el Cliente está en la Url https://jsonplaceholder.typicode.com/ y Busca el usuario")
     public void elClienteEstáEnLaUrlHttpsReqresInYBuscaElUsuario() {
-        super.setUpJson();
-        LOGGER.info("** Inicio segundo scenario de Json");
+        try {
+            super.setUpJson();
+            LOGGER.info("** Inicio segundo scenario de Json");
+        }catch (Exception e){
+            LOGGER.error(e);
+            LOGGER.info("Error en el inicio del segundo Scenario Json");
+        }
     }
 
     @When("cuando el cliente realiza la peticion de busqueda  de usuario selecionado")
     public void cuandoElClienteRealizaLaPeticionDeBusquedaDeUsuario() {
-        actor.attemptsTo(doGet().withTheResource(RESOURSE_JON));
-        LOGGER.info("** Inicio peticion");
+        try {
+            actor.attemptsTo(doGet().withTheResource(RESOURSE_JON));
+            LOGGER.info("** Inicio peticion");
+        }catch (Exception e){
+            LOGGER.error(e);
+            LOGGER.info("Error en el inicio del primer Scenario Json");
+        }
     }
     @Then("el cliente deberá ver un codigo de respuesta de usuario es encontrado")
     public void elClienteDeberáVerUnCodigoDeRespuestaDeUsuarioEsEncontrado() {
-        actor.should(
-                seeThat("El codigo de respuesta :", ResponseStatusCode
-                        .was(), equalTo(200)),
-                seeThat("el User ID esperado es: ",
-                        info -> new ResposeQuestionsJson().answeredBy(actor).getUserId(),
-                        equalTo(1)),
-                seeThat("el ID esperado es: ",
-                        info -> new ResposeQuestionsJson().answeredBy(actor).getId(),
-                        equalTo(1)),
-                seeThat("el title esperado es: ",
-                        info -> new ResposeQuestionsJson().answeredBy(actor).getTitle(),
-                        equalTo("sunt aut facere repellat provident occaecati excepturi optio reprehenderit"))
-        );
-        LOGGER.info("Verificacion scenario 2 Reqres");
+        try {
+            actor.should(
+                    seeThat("El codigo de respuesta :", ResponseStatusCode
+                            .was(), equalTo(200)),
+                    seeThat("el User ID esperado es: ",
+                            info -> new ResposeQuestionsJson().answeredBy(actor).getUserId(),
+                            equalTo(1)),
+                    seeThat("el ID esperado es: ",
+                            info -> new ResposeQuestionsJson().answeredBy(actor).getId(),
+                            equalTo(1)),
+                    seeThat("el title esperado es: ",
+                            info -> new ResposeQuestionsJson().answeredBy(actor).getTitle(),
+                            equalTo("sunt aut facere repellat provident occaecati excepturi optio reprehenderit"))
+            );
+            LOGGER.info("Verificacion scenario 2 Json");
+        }catch (Exception e){
+            LOGGER.error(e);
+            LOGGER.info("Error en el inicio del primer Scenario Json");
+        }
     }
 
-
-
 }
+
+
